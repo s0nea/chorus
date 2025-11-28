@@ -22,12 +22,10 @@ import type {
   ChorusBucketListResponse,
   ChorusCompareBucketRequest,
   ChorusCompareBucketResponse,
-  ChorusDeleteUserReplicationRequest,
   ChorusProxyCredentials,
-  ChorusReplicationBase,
   ChorusReplicationListResponse,
   ChorusStorageListResponse,
-  ChorusUserReplicationListResponse,
+  ChorusReplicationId,
 } from '@/utils/types/chorus';
 
 export abstract class ChorusService {
@@ -58,6 +56,7 @@ export abstract class ChorusService {
     return data;
   }
 
+  // TODO: filter options?
   static async getReplications(): Promise<ChorusReplicationListResponse> {
     const { data } = await apiClient.get<ChorusReplicationListResponse>(
       ApiHelper.getChorusAPIUrl('/replication'),
@@ -76,7 +75,7 @@ export abstract class ChorusService {
   }
 
   static async deleteBucketReplication(
-    payload: ChorusReplicationBase,
+    payload: ChorusReplicationId,
   ): Promise<void> {
     await apiClient.put(
       ApiHelper.getChorusAPIUrl('/replication/delete'),
@@ -85,7 +84,7 @@ export abstract class ChorusService {
   }
 
   static async pauseBucketReplication(
-    payload: ChorusReplicationBase,
+    payload: ChorusReplicationId,
   ): Promise<void> {
     await apiClient.put(
       ApiHelper.getChorusAPIUrl('/replication/pause'),
@@ -94,7 +93,7 @@ export abstract class ChorusService {
   }
 
   static async resumeBucketReplication(
-    payload: ChorusReplicationBase,
+    payload: ChorusReplicationId,
   ): Promise<void> {
     await apiClient.put(
       ApiHelper.getChorusAPIUrl('/replication/resume'),
@@ -111,22 +110,5 @@ export abstract class ChorusService {
     );
 
     return data;
-  }
-
-  static async getUserReplications(): Promise<ChorusUserReplicationListResponse> {
-    const { data } = await apiClient.get<ChorusUserReplicationListResponse>(
-      ApiHelper.getChorusAPIUrl('/replication/user'),
-    );
-
-    return data;
-  }
-
-  static async deleteUserReplication(
-    payload: ChorusDeleteUserReplicationRequest,
-  ): Promise<void> {
-    await apiClient.put(
-      ApiHelper.getChorusAPIUrl('/replication/user/delete'),
-      payload,
-    );
   }
 }
