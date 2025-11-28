@@ -24,6 +24,7 @@ import { useNotification } from '@clyso/clyso-ui-kit';
 import { useI18n } from 'vue-i18n';
 import type {
   ChorusReplication,
+  ChorusReplicationId,
   ChorusUserReplication,
 } from '@/utils/types/chorus';
 import { ReplicationStatusFilter } from '@/utils/types/chorus';
@@ -67,8 +68,9 @@ interface ChorusReplicationsState {
 
 const PAGE_SIZES = [10, 20, 30, 50, 100];
 
-function getChorusReplicationId(replication: ChorusReplication) {
-  return `${replication.user}${replication.bucket}${replication.from}${replication.to}`;
+function getChorusReplicationId(
+  replication: ChorusReplication): ChorusReplicationId {
+  return replication.id;
 }
 
 function getInitialState(): ChorusReplicationsState {
@@ -113,7 +115,7 @@ export const useChorusReplicationsStore = defineStore(
       state.replications.filter((replication) => {
         const isUserMatched =
           !state.filterUsers.length ||
-          state.filterUsers.includes(replication.user);
+          state.filterUsers.includes(replication.id.user);
         const isBucketMatched =
           !state.filterBucket ||
           replication.bucket
