@@ -80,7 +80,7 @@ function getInitialState(): ChorusReplicationsState {
     userReplicationToDelete: null,
     sorter: null,
     page: 1,
-    pageSize: PAGE_SIZES[0],
+    pageSize: PAGE_SIZES[0]!,
     pollingRequest: null,
     pollingTimeout: null,
     selectedReplicationIds: [],
@@ -280,6 +280,8 @@ export const useChorusReplicationsStore = defineStore(
         return;
       }
 
+      // TODO: check error and fix the code in order to remove the ignore
+      // @ts-expect-error: TS2345
       state.replications.splice(index, 1, {
         ...state.replications[index],
         ...partialReplication,

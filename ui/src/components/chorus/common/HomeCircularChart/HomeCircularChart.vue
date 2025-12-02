@@ -141,6 +141,8 @@
           { intersect: true },
           false,
         );
+        // TODO: check error and fix the code in order to remove the ignore
+        // @ts-expect-error: TS2339
         const { index } = elements[0];
 
         emit('clickElement', index);
