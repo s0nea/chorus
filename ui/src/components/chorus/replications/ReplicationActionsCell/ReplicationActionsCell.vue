@@ -28,7 +28,6 @@
   import { useI18n } from 'vue-i18n';
   import type {
     ChorusReplication,
-    ChorusUserReplication,
   } from '@/utils/types/chorus';
   import type { AddId } from '@/utils/types/helper';
   import { useChorusReplicationsStore } from '@/stores/chorusReplicationsStore';
@@ -50,14 +49,14 @@
   const {
     setReplicationPaused,
     deleteReplication: callDeleteReplication,
-    setUserReplicationToDelete,
+    // setUserReplicationToDelete,
   } = useChorusReplicationsStore();
 
   const {
     page,
     pagination,
-    userReplications,
-    userReplicationToDelete,
+    // userReplications,
+    // userReplicationToDelete,
     selectedReplicationIds,
   } = storeToRefs(useChorusReplicationsStore());
 
@@ -175,7 +174,7 @@
       }
 
       selectedReplicationIds.value = selectedReplicationIds.value.filter(
-        (selectedId) => selectedId !== props.replication.id,
+        (selectedId) => selectedId !== props.replication.objId,
       );
 
       createReplicationNotification({
@@ -238,7 +237,7 @@
     });
   }
 
-  const userReplication = computed<ChorusUserReplication | null>(
+  /*const userReplication = computed<ChorusUserReplication | null>(
     () =>
       userReplications.value.find(
         (userReplicationItem) =>
@@ -250,7 +249,7 @@
 
   function handleUserReplicationDelete() {
     setUserReplicationToDelete(userReplication.value);
-  }
+  }*/
 </script>
 
 <template>
@@ -353,7 +352,7 @@
         {{ t('actionDelete') }}
       </CTooltip>
 
-      <CTooltip
+      <!-- <CTooltip
         v-if="userReplication"
         :delay="1000"
       >
@@ -375,7 +374,7 @@
         </template>
 
         {{ t('actionDeleteUserReplication') }}
-      </CTooltip>
+      </CTooltip>-->
     </div>
   </div>
 </template>

@@ -34,6 +34,7 @@
   import ReplicationsEmpty from '@/components/chorus/replications/ReplicationsEmpty/ReplicationsEmpty.vue';
   import ReplicationDirectionCell from '@/components/chorus/replications/ReplicationDirectionCell/ReplicationDirectionCell.vue';
   import ReplicationActionsCell from '@/components/chorus/replications/ReplicationActionsCell/ReplicationActionsCell.vue';
+  import ReplicationBucketCell from '../ReplicationBucketCell/ReplicationBucketCell.vue';
 
   const { t } = useI18n({
     messages: i18nReplications,
@@ -60,15 +61,13 @@
     },
     {
       title: t('columnUser'),
-      key: 'user',
+      key: 'id.user',
       width: '15%',
       sorter: true,
     },
     {
       title: t('columnBucket'),
-      key: 'bucket',
-      width: '15%',
-      sorter: true,
+      key: 'bucket'
     },
     {
       title: t('columnCreatedAt'),
@@ -108,7 +107,7 @@
     page.value = 1;
   };
 
-  const rowKey = (row: AddId<ChorusReplication>) => row.id;
+  const rowKey = (row: AddId<ChorusReplication>) => row.objId;
 </script>
 
 <template>
@@ -136,6 +135,12 @@
       >
         <template #createdAt="{ rowData }">
           {{ GeneralHelper.formatDateTime(rowData.createdAt) }}
+        </template>
+
+        <template #bucket="{ rowData }">
+          <ReplicationBucketCell
+            :replication="rowData as AddId<ChorusReplication>"
+          />
         </template>
 
         <template #direction="{ rowData }">

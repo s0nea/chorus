@@ -48,7 +48,7 @@
     >
       <ReplicationsFilterByUser class="replications-filters__user" />
 
-      <ReplicationsFilterByBucket class="replications-filters__bucket" />
+      <!-- <ReplicationsFilterByBucket class="replications-filters__bucket" />-->
 
       <ReplicationsFilterByCreatedAt class="replications-filters__created-at" />
 

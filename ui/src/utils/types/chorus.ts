@@ -159,6 +159,7 @@ export interface ChorusReplicationSwitchInfo {
 
 export interface ChorusReplication {
   id: ChorusReplicationId;
+  objId: string;
   opts: ChorusReplicationOpts;
   createdAt: string;
   isPaused: boolean;
@@ -172,6 +173,7 @@ export interface ChorusReplication {
   isArchived: boolean;
   archivedAt: string;
   switchInfo: ChorusReplicationSwitchInfo;
+  isUserReplication: boolean
 }
 
 export interface ChorusReplicationListResponse {
@@ -203,16 +205,17 @@ export interface ChorusUserReplicationListResponse {
 }
 
 export interface ChorusUserReplication {
-  to: string;
-  from: string;
+  toStorage: string;
+  fromStorage: string;
   user: string;
 }
 
 export interface ChorusDeleteUserReplicationRequest {
   user: string;
-  from: string;
-  to: string;
-  deleteBucketReplications: boolean;
+  fromStorage: string;
+  toStorage: string;
+  fromBucket: string;
+  toBucket: string;
 }
 
 export enum ReplicationStatusFilter {

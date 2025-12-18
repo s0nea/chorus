@@ -75,7 +75,7 @@ export abstract class ChorusService {
     );
   }
 
-  static async deleteBucketReplication(
+  static async deleteReplication(
     payload: ChorusReplicationId,
   ): Promise<void> {
     await apiClient.put(
@@ -111,22 +111,5 @@ export abstract class ChorusService {
     );
 
     return data;
-  }
-
-  static async getUserReplications(): Promise<ChorusUserReplicationListResponse> {
-    const { data } = await apiClient.get<ChorusUserReplicationListResponse>(
-      ApiHelper.getChorusAPIUrl('/replication/user'),
-    );
-
-    return data;
-  }
-
-  static async deleteUserReplication(
-    payload: ChorusDeleteUserReplicationRequest,
-  ): Promise<void> {
-    await apiClient.put(
-      ApiHelper.getChorusAPIUrl('/replication/user/delete'),
-      payload,
-    );
   }
 }
