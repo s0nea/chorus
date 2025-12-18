@@ -22,12 +22,12 @@ import type {
   ChorusBucketListResponse,
   ChorusCompareBucketRequest,
   ChorusCompareBucketResponse,
-  ChorusDeleteUserReplicationRequest,
+  //ChorusDeleteUserReplicationRequest,
   ChorusProxyCredentials,
   ChorusReplicationId,
   ChorusReplicationListResponse,
   ChorusStorageListResponse,
-  ChorusUserReplicationListResponse,
+  //ChorusUserReplicationListResponse,
 } from '@/utils/types/chorus';
 
 export abstract class ChorusService {
@@ -75,7 +75,16 @@ export abstract class ChorusService {
     );
   }
 
-  static async deleteBucketReplication(
+  /*static async deleteBucketReplication(
+    payload: ChorusReplicationId,
+  ): Promise<void> {
+    await apiClient.put(
+      ApiHelper.getChorusAPIUrl('/replication/delete'),
+      payload,
+    );
+  }*/
+
+  static async deleteReplication(
     payload: ChorusReplicationId,
   ): Promise<void> {
     await apiClient.put(
@@ -113,7 +122,7 @@ export abstract class ChorusService {
     return data;
   }
 
-  static async getUserReplications(): Promise<ChorusUserReplicationListResponse> {
+  /*static async getUserReplications(): Promise<ChorusUserReplicationListResponse> {
     const { data } = await apiClient.get<ChorusUserReplicationListResponse>(
       ApiHelper.getChorusAPIUrl('/replication/user'),
     );
@@ -128,5 +137,5 @@ export abstract class ChorusService {
       ApiHelper.getChorusAPIUrl('/replication/user/delete'),
       payload,
     );
-  }
+  }*/
 }

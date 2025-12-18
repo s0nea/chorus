@@ -353,15 +353,8 @@ export const useChorusReplicationsStore = defineStore(
         return;
       }
 
-      const { user, bucket, from, to } = replication;
-
       await stopReplicationPolling();
-      await ChorusService.deleteBucketReplication({
-        user,
-        bucket,
-        from,
-        to,
-      });
+      await ChorusService.deleteReplication(replication.id);
 
       replicationIndex = state.replications.findIndex(
         ({ id }) => replication.id === id,
@@ -665,15 +658,8 @@ export const useChorusReplicationsStore = defineStore(
 
       await Promise.all(
         replications.map(async (replication) => {
-          const { from, to, user, bucket } = replication;
-
           try {
-            await ChorusService.deleteBucketReplication({
-              from,
-              to,
-              user,
-              bucket,
-            });
+            await ChorusService.deleteReplication(replication.id);
             successList.push(replication);
           } catch {
             errorList.push(replication);
@@ -701,10 +687,10 @@ export const useChorusReplicationsStore = defineStore(
       }
 
       if (successList.length !== 0) {
-        const successListIds = successList.map((item) => item.id);
+        const successListIds = successList.map((item) => item.idStr);
 
         state.replications = state.replications.filter(
-          (item) => !successListIds.includes(item.id),
+          (item) => !successListIds.includes(item.idStr),
         );
         state.selectedReplicationIds = state.selectedReplicationIds.filter(
           (item) => !successListIds.includes(item),
