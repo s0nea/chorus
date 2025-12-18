@@ -143,6 +143,8 @@ export default <I18nMessages>{
     filterStatusLiveBehind: 'Live Replication: Behind',
     filterByCreatedAtStartPlaceholder: 'Filter by',
     filterByCreatedAtEndPlaceholder: 'Created At',
+    userReplication: 'User Replication',
+    userReplicationDescription: 'Replicates all current and future buckets for the user.',
   },
   [I18nLocale.DE]: {
     replicationsTitle: 'Replikation',
@@ -274,5 +276,7 @@ export default <I18nMessages>{
     filterStatusLiveBehind: 'Live-Replikation: Hinterher',
     filterByCreatedAtStartPlaceholder: 'Filtern nach',
     filterByCreatedAtEndPlaceholder: 'Erstellt am',
+    userReplication: 'Benutzer-Replikation',
+    userReplicationDescription: 'Repliziert alle aktuellen und zukünftigen Buckets dieses Nutzers.',
   },
 };

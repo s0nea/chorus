@@ -159,6 +159,7 @@ export interface ChorusReplicationSwitchInfo {
 
 export interface ChorusReplication {
   id: ChorusReplicationId;
+  idStr: string;
   opts: ChorusReplicationOpts;
   createdAt: string;
   isPaused: boolean;
@@ -172,6 +173,7 @@ export interface ChorusReplication {
   isArchived: boolean;
   archivedAt: string;
   switchInfo: ChorusReplicationSwitchInfo;
+  replicationType: ReplicationType;
 }
 
 export interface ChorusReplicationListResponse {
@@ -198,6 +200,7 @@ export interface ChorusBucketListResponse {
   replicatedBuckets: string[];
 }
 
+/*
 export interface ChorusUserReplicationListResponse {
   replications: ChorusUserReplication[];
 }
@@ -212,8 +215,7 @@ export interface ChorusDeleteUserReplicationRequest {
   user: string;
   from: string;
   to: string;
-  deleteBucketReplications: boolean;
-}
+  delet */
 
 export enum ReplicationStatusFilter {
   ACTIVE = 'ACTIVE',
@@ -229,4 +231,9 @@ export enum AddReplicationStepName {
   'TO_STORAGE' = 2,
   'USER' = 3,
   'BUCKETS' = 4,
+}
+
+export enum ReplicationType {
+  'USER' = 'User Replication',
+  'BUCKET' = 'Bucket Replication',
 }

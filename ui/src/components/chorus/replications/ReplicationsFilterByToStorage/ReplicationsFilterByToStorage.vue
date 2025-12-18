@@ -37,7 +37,7 @@
     }[]
   >(() => {
     const sortedUniqueTo = [
-      ...new Set(replications.value.map((replication) => replication.to)),
+      ...new Set(replications.value.map((replication) => replication.id.toStorage)),
     ].sort();
 
     return sortedUniqueTo.map((to) => ({ label: to, value: to }));
