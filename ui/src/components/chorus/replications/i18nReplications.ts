@@ -145,6 +145,9 @@ export default <I18nMessages>{
     filterByCreatedAtEndPlaceholder: 'Created At',
     userReplication: 'User Replication',
     userReplicationDescription: 'Replicates all current and future buckets for the user.',
+    filterTypeBucket: 'Bucket replication',
+    filterTypeUser: 'User replication',
+    filterByTypePlaceholder: 'Filter by Type',
   },
   [I18nLocale.DE]: {
     replicationsTitle: 'Replikation',
@@ -278,5 +281,8 @@ export default <I18nMessages>{
     filterByCreatedAtEndPlaceholder: 'Erstellt am',
     userReplication: 'Benutzer-Replikation',
     userReplicationDescription: 'Repliziert alle aktuellen und zukünftigen Buckets dieses Nutzers.',
+    filterTypeBucket: 'Bucket-Replikation',
+    filterTypeUser: 'Benutzer-Replikation',
+    filterByTypePlaceholder: 'Nach Typ filtern',
   },
 };

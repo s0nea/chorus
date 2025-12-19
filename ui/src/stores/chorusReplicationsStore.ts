@@ -67,6 +67,7 @@ interface ChorusReplicationsState {
   filterToStorages: string[];
   filterStatuses: ReplicationStatusFilter[];
   filterCreatedAtRange: [number, number] | null;
+  filterType: ReplicationType | null;
 }
 
 const PAGE_SIZES = [10, 20, 30, 50, 100] as const;
@@ -106,6 +107,7 @@ function getInitialState(): ChorusReplicationsState {
     filterToStorages: [],
     filterStatuses: [],
     filterCreatedAtRange: null,
+    filterType: null,
   };
 }
 
@@ -151,13 +153,17 @@ export const useChorusReplicationsStore = defineStore(
             replication,
             state.filterCreatedAtRange,
           );
+        const isTypeMatched =
+          !state.filterType ||
+          replication.replicationType === state.filterType;
 
         return (
           isUserMatched &&
           isBucketMatched &&
           // isToStorageMatched &&
           isStatusMatched &&
-          isCreatedAtMatched
+          isCreatedAtMatched &&
+          isTypeMatched
         );
       }),
     );
@@ -168,7 +174,8 @@ export const useChorusReplicationsStore = defineStore(
         state.filterBucket !== '' ||
         state.filterToStorages.length !== 0 ||
         state.filterStatuses.length !== 0 ||
-        state.filterCreatedAtRange !== null,
+        state.filterCreatedAtRange !== null ||
+        state.filterType !== null,
     );
 
     function clearFilters() {
@@ -177,6 +184,7 @@ export const useChorusReplicationsStore = defineStore(
       state.filterToStorages = [];
       state.filterStatuses = [];
       state.filterCreatedAtRange = null;
+      state.filterType = null;
     }
 
     const computedReplications = computed<AddId<ChorusReplication>[]>(() => {
