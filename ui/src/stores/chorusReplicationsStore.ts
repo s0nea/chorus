@@ -331,7 +331,13 @@ export const useChorusReplicationsStore = defineStore(
         return;
       }
 
-      const { user, bucket, from, to } = replication;
+      const {
+        user,
+        fromBucket,
+        toBucket,
+        fromStorage,
+        toStorage
+      } = replication.id;
 
       await stopReplicationPolling();
       await (
@@ -340,9 +346,10 @@ export const useChorusReplicationsStore = defineStore(
           : ChorusService.resumeBucketReplication
       )({
         user,
-        bucket,
-        from,
-        to,
+        fromBucket,
+        toBucket,
+        fromStorage,
+        toStorage,
       });
 
       state.replications.splice(replicationIndex, 1, {
@@ -534,14 +541,21 @@ export const useChorusReplicationsStore = defineStore(
 
       await Promise.all(
         replications.map(async (replication) => {
-          const { from, to, user, bucket } = replication;
+          const {
+            fromStorage,
+            toStorage,
+            user,
+            fromBucket,
+            toBucket
+          } = replication.id;
 
           try {
             await ChorusService.resumeBucketReplication({
-              from,
-              to,
+              fromStorage,
+              toStorage,
               user,
-              bucket,
+              fromBucket,
+              toBucket
             });
             successList.push(replication);
           } catch {
@@ -571,7 +585,7 @@ export const useChorusReplicationsStore = defineStore(
 
       if (successList.length !== 0) {
         successList.forEach((replication) => {
-          setReplicationById(replication.id, { isPaused: false });
+          setReplicationById(replication.idStr, { isPaused: false });
         });
         createNotification({
           type: 'success',
@@ -599,14 +613,21 @@ export const useChorusReplicationsStore = defineStore(
 
       await Promise.all(
         replications.map(async (replication) => {
-          const { from, to, user, bucket } = replication;
+          const {
+            fromStorage,
+            toStorage,
+            user,
+            fromBucket,
+            toBucket
+          } = replication.id;
 
           try {
             await ChorusService.pauseBucketReplication({
-              from,
-              to,
+              fromStorage,
+              toStorage,
               user,
-              bucket,
+              fromBucket,
+              toBucket
             });
             successList.push(replication);
           } catch {
@@ -636,7 +657,7 @@ export const useChorusReplicationsStore = defineStore(
 
       if (successList.length !== 0) {
         successList.forEach((replication) => {
-          setReplicationById(replication.id, { isPaused: true });
+          setReplicationById(replication.idStr, { isPaused: true });
         });
         createNotification({
           type: 'success',
