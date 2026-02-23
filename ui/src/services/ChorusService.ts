@@ -25,6 +25,8 @@ import type {
   ChorusProxyCredentials,
   ChorusReplicationId,
   ChorusReplicationListResponse,
+  ChorusRoutingPoliciesRequest,
+  ChorusRoutingResponse,
   ChorusStorageListResponse,
 } from '@/utils/types/chorus';
 
@@ -103,6 +105,17 @@ export abstract class ChorusService {
   ): Promise<ChorusBucketListResponse> {
     const { data } = await apiClient.post<ChorusBucketListResponse>(
       ApiHelper.getChorusAPIUrl('/replication/list-buckets'),
+      payload,
+    );
+
+    return data;
+  }
+
+  static async getRoutingPolicies(
+    payload: ChorusRoutingPoliciesRequest,
+  ): Promise<ChorusRoutingResponse> {
+    const { data } = await apiClient.post<ChorusRoutingResponse>(
+      ApiHelper.getChorusAPIUrl('/routing'),
       payload,
     );
 

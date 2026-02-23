@@ -217,3 +217,43 @@ export enum ReplicationType {
   'USER' = 'User Replication',
   'BUCKET' = 'Bucket Replication',
 }
+
+export enum RoutingPolicyTypes {
+  USER = 'User',
+  BUCKET = 'Bucket',
+}
+
+export interface ChorusUserRoutingPolicy {
+  user: string;
+  toStorage: string;
+  isBlocked: boolean;
+}
+
+export interface ChorusBucketRoutingPolicy extends ChorusUserRoutingPolicy {
+  bucket: string;
+}
+
+export interface ChorusRoutingPolicy extends ChorusUserRoutingPolicy {
+  id: string;
+  type: RoutingPolicyTypes;
+  bucket?: string;
+}
+
+export interface ChorusRoutingPoliciesRequestFilters {
+  user: string;
+  toStorage: string;
+  isBlocked: boolean;
+  bucket: string;
+}
+
+export interface ChorusRoutingPoliciesRequest {
+  hideUserRoutings: boolean;
+  hideBucketRoutings: boolean;
+  filter?: ChorusRoutingPoliciesRequestFilters;
+}
+
+export interface ChorusRoutingResponse {
+  main: string;
+  userRoutings: ChorusUserRoutingPolicy[];
+  bucketRoutings: ChorusBucketRoutingPolicy[];
+}
