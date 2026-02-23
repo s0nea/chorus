@@ -37,6 +37,10 @@
       label: t(RouteName.CHORUS_REPLICATION),
     },
     {
+      name: RouteName.CHORUS_ROUTING_POLICIES,
+      label: t(RouteName.CHORUS_ROUTING_POLICIES),
+    },
+    {
       name: RouteName.CHORUS_STORAGES,
       label: t(RouteName.CHORUS_STORAGES),
     },
