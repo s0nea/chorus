@@ -25,9 +25,10 @@ import type {
   ChorusProxyCredentials,
   ChorusReplicationId,
   ChorusReplicationListResponse,
-  RoutingPoliciesRequest,
+  RoutingPolicyRequest,
   RoutingPolicyResponse,
   ChorusStorageListResponse,
+  RoutingPolicyDeleteRequest,
 } from '@/utils/types/chorus';
 
 export abstract class ChorusService {
@@ -120,5 +121,11 @@ export abstract class ChorusService {
     );
 
     return data;
+  }
+
+  static async deleteRoutingPolicy(
+    payload: RoutingPolicyDeleteRequest,
+  ): Promise<void> {
+    await apiClient.put(ApiHelper.getChorusAPIUrl('/routing/delete'), payload);
   }
 }

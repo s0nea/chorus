@@ -23,6 +23,7 @@ export default <I18nMessages>{
     columnBucket: 'Bucket',
     columnStorage: 'Storage',
     columnStatus: 'Status',
+    columnActions: 'Actions',
     filterByUserPlaceholder: 'Filter by User',
     filterByBucketPlaceholder: 'Search by Bucket',
     filterByStoragePlaceholder: 'Filter by Storage',
@@ -38,6 +39,13 @@ export default <I18nMessages>{
       'Access to the configured routing policy target blocked',
     routingPolicyStorage:
       'The storage the routing policy configuration is related to',
+    actionDelete: 'Delete',
+    routingPolicyDeletionConfirmTitle: 'Delete Routing Policy',
+    routingPolicyDeletionConfirmContent:
+      'You are about to delete the routing policy as follows:',
+    routingPolicyDeletionConfirmQuestion: 'Are you sure you want to continue?',
+    routingPolicyDeletionConfirmAction: 'Confirm Deletion',
+    routingPolicyDeletionCancelAction: 'Cancel',
   },
   [I18nLocale.DE]: {
     routingPoliciesTitle: 'Routing-Richtlinien',
@@ -45,6 +53,7 @@ export default <I18nMessages>{
     columnBucket: 'Bucket',
     columnStorage: 'Speicher',
     columnStatus: 'Status',
+    columnActions: 'Actions',
     filterByUserPlaceholder: 'Nach Benutzer filtern',
     filterByBucketPlaceholder: 'Nach Bucket suchen',
     filterByStoragePlaceholder: 'Nach Speicherort filtern',
@@ -60,5 +69,12 @@ export default <I18nMessages>{
       'Zugriff auf das konfigurierte Ziel der Routing-Richtlinie blockiert',
     routingPolicyStorage:
       'Der Storage, auf den sich die Routing-Richtlinie bezieht',
+    actionDelete: 'Löschen',
+    routingPolicyDeletionConfirmTitle: 'Routing-Richtlinie Löschen',
+    routingPolicyDeletionConfirmContent:
+      'Sie löschen folgende Routing-Richtlinie:',
+    routingPolicyDeletionConfirmQuestion: 'Möchten Sie fortfahren?',
+    routingPolicyDeletionConfirmAction: 'Löschen bestätigen',
+    routingPolicyDeletionCancelAction: 'Abbrechen',
   },
 };

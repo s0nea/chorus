@@ -27,6 +27,7 @@
   import i18nRoutingPolicies from '../i18nRoutingPolicies';
   import RoutingPolicyStatusCell from '../RoutingPolicyStatusCell/RoutingPolicyStatusCell.vue';
   import RoutingPolicyStorageCell from '../RoutingPolicyStorageCell/RoutingPolicyStorageCell.vue';
+  import RoutingPolicyActionsCell from '../RoutingPolicyActionsCell/RoutingPolicyActionsCell.vue';
   import type { RoutingPolicy } from '@/utils/types/chorus';
   import { useChorusRoutingPoliciesStore } from '@/stores/chorusRoutingPoliciesStore';
 
@@ -72,6 +73,10 @@
       title: t('columnStatus'),
       key: 'isBlocked',
       sorter: true,
+    },
+    {
+      title: t('columnActions'),
+      key: 'actions',
     },
   ]);
 
@@ -133,6 +138,10 @@
 
         <template #isBlocked="{ rowData }">
           <RoutingPolicyStatusCell :routing-policy="rowData" />
+        </template>
+
+        <template #actions="{ rowData }">
+          <RoutingPolicyActionsCell :routing-policy="rowData" />
         </template>
       </CDataTable>
     </div>
