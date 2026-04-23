@@ -32,6 +32,7 @@ const routes: I18nMessages<Routes> = {
     [RouteName.CHORUS_MONITORING]: 'Monitoring',
     [RouteName.CHORUS_ROUTING_POLICIES]: 'Routing Policies',
     [RouteName.CHORUS_ADD_ROUTING_POLICY]: 'Add Routing Policy',
+    [RouteName.CHORUS_CREDENTIAL_DETAILS]: 'Credential Details',
   },
   [I18nLocale.DE]: {
     [RouteName.LOGIN]: 'Login',
@@ -43,6 +44,7 @@ const routes: I18nMessages<Routes> = {
     [RouteName.CHORUS_MONITORING]: 'Monitoring',
     [RouteName.CHORUS_ROUTING_POLICIES]: 'Routing-Richtlinien',
     [RouteName.CHORUS_ADD_ROUTING_POLICY]: 'Routing-Richtlinie hinzufügen',
+    [RouteName.CHORUS_CREDENTIAL_DETAILS]: 'Zugangsdatendetails',
   },
 };
 

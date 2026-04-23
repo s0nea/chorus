@@ -30,6 +30,7 @@ import type {
   ChorusStorageListResponse,
   RoutingPolicyEditRequest,
   RoutingPolicyAddRequest,
+  UserCredentialsSetRequest,
 } from '@/utils/types/chorus';
 
 export abstract class ChorusService {
@@ -150,5 +151,11 @@ export abstract class ChorusService {
     payload: RoutingPolicyAddRequest,
   ): Promise<void> {
     await apiClient.post(ApiHelper.getChorusAPIUrl('/routing/add'), payload);
+  }
+
+  static async setUserCredentials(
+    payload: UserCredentialsSetRequest,
+  ): Promise<void> {
+    await apiClient.post(ApiHelper.getChorusAPIUrl('/credentials'), payload);
   }
 }

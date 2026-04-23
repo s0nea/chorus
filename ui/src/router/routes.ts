@@ -25,6 +25,7 @@ import ChorusAddReplicationPage from '@/pages/ChorusAddReplicationPage/ChorusAdd
 import ChorusStorageDetailsPage from '@/pages/ChorusStorageDetailsPage/ChorusStorageDetailsPage.vue';
 import ChorusRoutingPoliciesPage from '@/pages/ChorusRoutingPoliciesPage/ChorusRoutingPoliciesPage.vue';
 import ChorusAddRoutingPolicyPage from '@/pages/ChorusAddRoutingPolicyPage/ChorusAddRoutingPolicyPage.vue';
+import ChorusCredentialDetailsPage from '@/pages/ChorusCredentialDetailsPage/ChorusCredentialDetailsPage.vue';
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -56,6 +57,12 @@ export const routes: RouteRecordRaw[] = [
         path: 'storages/:storageName',
         name: RouteName.CHORUS_STORAGE_DETAILS,
         component: ChorusStorageDetailsPage,
+        props: true,
+      },
+      {
+        path: 'storages/:storageName/credentials/:alias?',
+        name: RouteName.CHORUS_CREDENTIAL_DETAILS,
+        component: ChorusCredentialDetailsPage,
         props: true,
       },
       {
