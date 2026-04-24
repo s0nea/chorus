@@ -15,16 +15,22 @@
  */
 
 import { defineStore } from 'pinia';
-import { reactive, toRefs } from 'vue';
+import { computed, reactive, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
+import type { DataTablePaginationObject } from '@clyso/clyso-ui-kit';
 import type { ChorusStorage } from '@/utils/types/chorus';
 import { ChorusService } from '@/services/ChorusService';
 import { RouteName } from '@/utils/types/router';
+
+const CREDENTIALS_PAGE_SIZES: number[] = [10, 20, 30, 50, 100];
 
 interface ChorusStorageDetailsState {
   isLoading: boolean;
   hasError: boolean;
   storage: ChorusStorage | null;
+  filterAlias: string;
+  page: number;
+  pageSize: number;
 }
 
 function getInitialState(): ChorusStorageDetailsState {
@@ -32,6 +38,9 @@ function getInitialState(): ChorusStorageDetailsState {
     isLoading: false,
     hasError: false,
     storage: null,
+    filterAlias: '',
+    page: 1,
+    pageSize: 10,
   };
 }
 
@@ -61,12 +70,38 @@ export const useChorusStorageDetailsStore = defineStore(
       }
     }
 
+    const computedCredentials = computed(() => {
+      const credentials = state.storage?.credentials ?? [];
+      const query = state.filterAlias.trim().toLowerCase();
+
+      if (!query) {
+        return credentials;
+      }
+
+      return credentials.filter((c) => c.alias.toLowerCase().includes(query));
+    });
+
+    const pagination = computed<DataTablePaginationObject>(() => {
+      const itemCount = computedCredentials.value.length;
+
+      return {
+        page: state.page,
+        pageSize: state.pageSize,
+        showSizePicker: true,
+        pageSizes: [...CREDENTIALS_PAGE_SIZES],
+        pageCount: Math.ceil(itemCount / state.pageSize) || 1,
+        itemCount,
+      };
+    });
+
     async function $reset() {
       Object.assign(state, getInitialState());
     }
 
     return {
       ...toRefs(state),
+      computedCredentials,
+      pagination,
       initStorageDetails,
       $reset,
     };

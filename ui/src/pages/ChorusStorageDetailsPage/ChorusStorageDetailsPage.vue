@@ -29,6 +29,7 @@
   import { RouteName } from '@/utils/types/router';
   import i18nStorageDetails from '@/components/chorus/storage-details/i18nStorageDetails';
   import StorageGeneral from '@/components/chorus/storage-details/StorageGeneral/StorageGeneral.vue';
+  import StorageCredentials from '@/components/chorus/credentials/StorageCredentials/StorageCredentials.vue';
   import ChorusStorageProvider from '@/components/chorus/common/ChorusStorageProvider/ChorusStorageProvider.vue';
 
   const props = defineProps<{
@@ -113,6 +114,7 @@
       class="storage-details-page__content"
     >
       <StorageGeneral class="storage-details-page__general" />
+      <StorageCredentials class="storage-details-page__credentials" />
     </div>
   </CDashboardPage>
 </template>
