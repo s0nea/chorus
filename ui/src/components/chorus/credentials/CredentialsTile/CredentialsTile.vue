@@ -46,6 +46,13 @@
       margin-bottom: utils.unit(6);
     }
 
+<<<<<<< HEAD
+=======
+    &__tags {
+      margin-bottom: utils.unit(4);
+    }
+
+>>>>>>> c9e6489 (feat(ui): add storage credentials list)
     &__actions {
       margin-bottom: utils.unit(4);
     }
