@@ -23,7 +23,8 @@ export default <I18nMessages>{
       'An error occurred while retrieving storage details.\nPlease try again.',
     storageDetailsErrorAction: 'Retry',
     storagesBreadcrumb: 'Storages',
-    storageDetailsBreadcrumb: 'Storage Details',
+    storageDetailsBreadcrumb: 'Details',
+    filterByUserAliasPlaceholder: 'Storage Details',
   },
   [I18nLocale.DE]: {
     storageDetailsErrorTitle: 'Fehler bei den Speicherdetails',
@@ -31,6 +32,7 @@ export default <I18nMessages>{
       'Beim Abrufen der Speicherdetails ist ein Fehler aufgetreten.\nBitte versuchen Sie es erneut.',
     storageDetailsErrorAction: 'Erneut versuchen',
     storagesBreadcrumb: 'Speicher',
-    storageDetailsBreadcrumb: 'Speicherdetails',
+    storageDetailsBreadcrumb: 'Details',
+    filterByUserAliasPlaceholder: 'Speicherdetails',
   },
 };
