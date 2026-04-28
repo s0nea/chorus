@@ -15,15 +15,21 @@
   -->
 
 <script setup lang="ts">
-  import { CTile } from '@clyso/clyso-ui-kit';
+  import { CButton, CIcon, CTile } from '@clyso/clyso-ui-kit';
+  import { storeToRefs } from 'pinia';
   import { useI18n } from 'vue-i18n';
   import i18nCredentials from '../i18nCredentials';
   import CredentialsList from '../CredentialsList/CredentialsList.vue';
   import CredentialsFilters from '../CredentialsFilters/CredentialsFilters.vue';
+  import { RouteName } from '@/utils/types/router';
+  import { IconName } from '@/utils/types/icon';
+  import { useChorusStorageDetailsStore } from '@/stores/chorusStorageDetailsStore';
 
   const { t } = useI18n({
     messages: i18nCredentials,
   });
+
+  const { storage } = storeToRefs(useChorusStorageDetailsStore());
 </script>
 
 <template>
@@ -33,6 +39,33 @@
     </template>
 
     <CredentialsFilters class="credentials-tile__filters" />
+
+    <div class="credentials-tile__actions">
+      <div class="credentials-tile__action credentials-tile__action--creation">
+        <RouterLink
+          :to="{
+            name: RouteName.CHORUS_SET_CREDENTIAL,
+            params: { storageName: storage?.name },
+          }"
+        >
+          <CButton
+            type="primary"
+            size="medium"
+            ghost
+            tag="div"
+          >
+            <template #icon>
+              <CIcon
+                :is-inline="true"
+                :name="IconName.BASE_ADD"
+              />
+            </template>
+
+            {{ t('addCredentialAction') }}
+          </CButton>
+        </RouterLink>
+      </div>
+    </div>
 
     <CredentialsList class="credentials-tile__credentials" />
   </CTile>
@@ -46,15 +79,10 @@
       margin-bottom: utils.unit(6);
     }
 
-<<<<<<< HEAD
-=======
-    &__tags {
-      margin-bottom: utils.unit(4);
-    }
-
->>>>>>> c9e6489 (feat(ui): add storage credentials list)
     &__actions {
       margin-bottom: utils.unit(4);
+      display: flex;
+      flex-direction: row-reverse;
     }
   }
 </style>

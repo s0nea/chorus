@@ -81,6 +81,27 @@ export interface ChorusCredential {
   secretKey: string;
 }
 
+// Write types for POST /credentials
+export interface S3Credential {
+  accessKey: string;
+  secretKey: string;
+}
+
+export interface SwiftCredential {
+  username: string;
+  password: string;
+  domainName: string;
+  tenantName: string;
+}
+
+// `user` maps to `credential.alias` from the GET /storage response.
+export interface UserCredentialSetRequest {
+  storage: string;
+  user: string;
+  s3Cred?: S3Credential;
+  swiftCred?: SwiftCredential;
+}
+
 export interface ChorusStorageListResponse {
   storages: ChorusStorage[];
 }

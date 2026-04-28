@@ -19,6 +19,7 @@
   import { useI18n } from 'vue-i18n';
   import i18nCredentials from '../i18nCredentials';
   import type { ChorusCredential, ChorusStorage } from '@/utils/types/chorus';
+  import { RouteName } from '@/utils/types/router';
 
   const { t } = useI18n({
     messages: i18nCredentials,
@@ -38,7 +39,7 @@
           <template #trigger>
             <RouterLink
               :to="{
-                // name: TODO: add route name, once defined
+                name: RouteName.CHORUS_SET_CREDENTIAL,
                 params: {
                   storageName: props.storage.name,
                   alias: props.credential.alias,

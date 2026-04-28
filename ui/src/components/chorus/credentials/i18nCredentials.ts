@@ -24,6 +24,7 @@ export default <I18nMessages>{
     columnActions: 'Actions',
     filterByUserAliasPlaceholder: 'Filter by User Alias',
     actionEdit: 'Edit',
+    addCredentialAction: 'Add Credential',
   },
   [I18nLocale.DE]: {
     credentialsTitle: 'Zugangsdaten',
@@ -32,5 +33,6 @@ export default <I18nMessages>{
     columnActions: 'Aktionen',
     filterByUserAliasPlaceholder: 'Nach Benutzeralias filtern',
     actionEdit: 'Bearbeiten',
+    addCredentialAction: 'Zugangsdaten hinzufügen',
   },
 };
