@@ -103,14 +103,6 @@
         @update:page-size="handlePageSizeUpdate"
         @retry="initStorageDetails(storage?.name ?? '')"
       >
-        <template #alias="{ rowData }">
-          {{ rowData.alias }}
-        </template>
-
-        <template #accessKey="{ rowData }">
-          {{ rowData.accessKey }}
-        </template>
-
         <template #actions="{ rowData }">
           <CredentialsActionsCell :credential="rowData as ChorusCredential" />
         </template>
