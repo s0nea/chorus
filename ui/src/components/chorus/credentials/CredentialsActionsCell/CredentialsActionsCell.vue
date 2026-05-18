@@ -38,14 +38,17 @@
 <template>
   <div class="credentials-actions-cell">
     <div class="actions-list">
-      <div class="actions-list__item actions-list__item--edit">
+      <div
+        v-if="storage"
+        class="actions-list__item actions-list__item--edit"
+      >
         <CTooltip :delay="1000">
           <template #trigger>
             <RouterLink
               :to="{
                 name: RouteName.CHORUS_SET_CREDENTIAL,
                 params: {
-                  storageName: storage?.name,
+                  storageName: storage.name,
                   alias: props.credential.alias,
                 },
               }"

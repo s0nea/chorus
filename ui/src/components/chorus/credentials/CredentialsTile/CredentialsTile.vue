@@ -40,11 +40,14 @@
 
     <CredentialsFilters class="credentials-tile__filters" />
 
-    <div class="credentials-tile__actions">
+    <div
+      v-if="storage"
+      class="credentials-tile__actions"
+    >
       <RouterLink
         :to="{
           name: RouteName.CHORUS_SET_CREDENTIAL,
-          params: { storageName: storage?.name },
+          params: { storageName: storage.name },
         }"
       >
         <CButton
