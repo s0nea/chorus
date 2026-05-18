@@ -54,6 +54,7 @@
                 secondary
                 size="tiny"
                 type="primary"
+                tag="div"
               >
                 <template #icon>
                   <CIcon
