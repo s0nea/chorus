@@ -20,8 +20,9 @@
     CBreadcrumbItem,
     CDashboardPage,
   } from '@clyso/clyso-ui-kit';
-  import { computed, onBeforeMount, onUnmounted } from 'vue';
+  import { onBeforeMount, onUnmounted } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { storeToRefs } from 'pinia';
   import { RouteName } from '@/utils/types/router';
   import i18nSetCredential from '@/components/chorus/set-credential/i18nSetCredential';
   import { useChorusSetCredentialStore } from '@/stores/chorusSetCredentialStore';
@@ -34,12 +35,11 @@
   const { t } = useI18n({ messages: i18nSetCredential });
 
   const { initSetCredentialPage, $reset } = useChorusSetCredentialStore();
+  const { isEditMode } = storeToRefs(useChorusSetCredentialStore());
 
   onBeforeMount(() => {
     initSetCredentialPage(props.storageName, props.alias);
   });
-
-  const isEditMode = computed(() => !!props.alias);
 
   onUnmounted(() => {
     $reset();

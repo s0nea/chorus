@@ -24,6 +24,7 @@ import { RouteName } from '@/utils/types/router';
 interface ChorusSetCredentialState {
   isLoading: boolean;
   isSubmitting: boolean;
+  isEditMode: boolean;
   hasError: boolean;
   storage: ChorusStorage | null;
   user: string;
@@ -41,6 +42,7 @@ function getInitialState(): ChorusSetCredentialState {
   return {
     isLoading: false,
     isSubmitting: false,
+    isEditMode: false,
     hasError: false,
     storage: null,
     user: '',
@@ -85,6 +87,7 @@ export const useChorusSetCredentialStore = defineStore(
 
         if (alias) {
           state.user = alias;
+          state.isEditMode = true;
         }
       } catch {
         state.hasError = true;
