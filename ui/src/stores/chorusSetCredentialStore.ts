@@ -69,6 +69,7 @@ export const useChorusSetCredentialStore = defineStore(
 
     async function initSetCredentialPage(storageName: string, alias?: string) {
       state.isLoading = true;
+      state.hasError = false;
 
       try {
         const { storages } = await ChorusService.getStorages();
