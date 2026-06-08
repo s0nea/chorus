@@ -62,7 +62,7 @@
     {
       title: t('columnUser'),
       key: 'id.user',
-      width: '15%',
+      width: '10%',
       sorter: true,
     },
     {

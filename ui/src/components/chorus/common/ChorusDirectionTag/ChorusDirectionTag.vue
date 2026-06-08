@@ -21,7 +21,7 @@
 
   const props = withDefaults(
     defineProps<{
-      storageName: string;
+      elementText: string;
       tooltip?: string;
       size?: CTagProps['size'];
       type?: CTagProps['type'];
@@ -31,13 +31,13 @@
       size: 'small',
       type: 'success',
       tooltip: undefined,
-      icon: undefined,
+      iconName: undefined,
     },
   );
 </script>
 
 <template>
-  <div class="chorus-storage-tag">
+  <div class="chorus-direction-tag">
     <CTooltip
       :delay="500"
       :disabled="!props.tooltip"
@@ -46,7 +46,7 @@
         <CTag
           :bordered="false"
           round
-          class="chorus-storage-tag__storage-name"
+          class="chorus-direction-tag__element-text"
           :size="props.size"
           :type="props.type"
         >
@@ -59,11 +59,11 @@
               :name="props.iconName"
             />
           </template>
-          {{ props.storageName }}
+          {{ props.elementText }}
         </CTag>
       </template>
-      <span class="chorus-storage-tag__storage-tooltip">
-        <strong>{{ props.storageName }}</strong
+      <span class="chorus-direction-tag__element-tooltip">
+        <strong>{{ props.elementText }}</strong
         >: {{ props.tooltip }}
       </span>
     </CTooltip>

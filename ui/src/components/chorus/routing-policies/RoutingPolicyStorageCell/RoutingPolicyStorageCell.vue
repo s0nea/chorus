@@ -17,9 +17,9 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
   import i18nRoutingPolicies from '../i18nRoutingPolicies';
-  import ChorusStorageTag from '../../common/ChorusStorageTag/ChorusStorageTag.vue';
   import type { RoutingPolicy } from '@/utils/types/chorus';
   import { IconName } from '@/utils/types/icon';
+  import ChorusDirectionTag from '@/components/chorus/common/ChorusDirectionTag/ChorusDirectionTag.vue';
 
   const { t } = useI18n({
     messages: i18nRoutingPolicies,
@@ -32,9 +32,9 @@
 
 <template>
   <div class="routing-policy-storage-cell">
-    <ChorusStorageTag
+    <ChorusDirectionTag
       v-if="routingPolicy.toStorage"
-      :storage-name="routingPolicy.toStorage"
+      :element-text="routingPolicy.toStorage"
       :tooltip="t('routingPolicyStorage')"
       type="primary"
       :icon-name="IconName.BASE_SERVER"
