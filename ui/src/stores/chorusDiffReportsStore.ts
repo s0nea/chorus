@@ -21,6 +21,7 @@ import type {
   DataTableSortState,
 } from '@clyso/clyso-ui-kit';
 import type { DiffReport } from '@/utils/types/chorus';
+import { DiffReportStatusFilter } from '@/utils/types/chorus';
 import type { AddId } from '@/utils/types/helper';
 import { GeneralHelper } from '@/utils/helpers/GeneralHelper';
 import { ChorusService } from '@/services/ChorusService';
@@ -35,6 +36,9 @@ interface ChorusDiffReportsState {
   pageSize: number;
   pollingRequest: Promise<unknown> | null;
   pollingTimeout: number | null;
+  filterDirections: string[];
+  filterBuckets: string[];
+  filterStatuses: DiffReportStatusFilter[];
 }
 
 const PAGE_SIZES = [10, 20, 30, 50, 100] as const;
@@ -49,6 +53,9 @@ function getInitialState(): ChorusDiffReportsState {
     pageSize: PAGE_SIZES[0],
     pollingRequest: null,
     pollingTimeout: null,
+    filterDirections: [],
+    filterBuckets: [],
+    filterStatuses: [],
   };
 }
 
@@ -57,14 +64,47 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
 
   const hasNoData = computed<boolean>(() => state.reports.length === 0);
 
+  const filteredReports = computed<AddId<DiffReport>[]>(() =>
+    state.reports.filter((report) => {
+      const isDirectionMatched =
+        !state.filterDirections.length ||
+        state.filterDirections.includes(
+          DiffReportsHelper.getDirectionPair(report),
+        );
+      const isBucketMatched =
+        !state.filterBuckets.length ||
+        state.filterBuckets.includes(DiffReportsHelper.getBucketPair(report));
+      const isStatusFilterMatched =
+        !state.filterStatuses.length ||
+        state.filterStatuses.some((status) =>
+          DiffReportsHelper.isDiffReportStatusMatched(report, status),
+        );
+
+      return isDirectionMatched && isBucketMatched && isStatusFilterMatched;
+    }),
+  );
+
+  const isFiltered = computed<boolean>(
+    () =>
+      state.filterDirections.length !== 0 ||
+      state.filterBuckets.length !== 0 ||
+      state.filterStatuses.length !== 0,
+  );
+
+  function clearFilters() {
+    state.filterDirections = [];
+    state.filterBuckets = [];
+    state.filterStatuses = [];
+  }
+
   const computedReports = computed<AddId<DiffReport>[]>(() => {
     const sortedReports = state.sorter
       ? GeneralHelper.orderBy(
-          state.reports,
+          filteredReports.value,
           [state.sorter.columnKey],
           [state.sorter.order === 'ascend' ? 'asc' : 'desc'],
         )
-      : state.reports;
+      : filteredReports.value;
 
     const start = (state.page - 1) * state.pageSize;
     const end = state.page * state.pageSize;
@@ -77,11 +117,15 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
     pageSize: state.pageSize,
     showSizePicker: true,
     pageSizes: [...PAGE_SIZES],
-    pageCount: Math.ceil(state.reports.length / state.pageSize),
-    itemCount: state.reports.length,
+    pageCount: Math.ceil(filteredReports.value.length / state.pageSize),
+    itemCount: filteredReports.value.length,
     prefix({ itemCount }) {
       if (state.isLoading || state.hasError) {
         return '';
+      }
+
+      if (isFiltered.value) {
+        return `Filtered: ${filteredReports.value.length} / Total: ${state.reports.length}`;
       }
 
       return `Total: ${itemCount}`;
@@ -161,8 +205,10 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
   return {
     ...toRefs(state),
     hasNoData,
+    isFiltered,
     pagination,
     computedReports,
+    clearFilters,
     initDiffReportPage,
     $reset,
   };
