@@ -50,7 +50,7 @@ interface ChorusReplicationsState {
   isDeleteSelectedProcessing: boolean;
 
   filterUsers: string[];
-  filterBucket: string;
+  filterBuckets: string[];
   filterDirections: string[];
   filterStatuses: ReplicationStatusFilter[];
   filterCreatedAtRange: [number, number] | null;
@@ -91,7 +91,7 @@ function getInitialState(): ChorusReplicationsState {
     isDeleteSelectedProcessing: false,
 
     filterUsers: [],
-    filterBucket: '',
+    filterBuckets: [],
     filterDirections: [],
     filterStatuses: [],
     filterCreatedAtRange: null,
@@ -118,15 +118,10 @@ export const useChorusReplicationsStore = defineStore(
           !state.filterUsers.length ||
           state.filterUsers.includes(replication.id.user);
         const isBucketMatched =
-          !state.filterBucket ||
-          replication.id.fromBucket
-            ?.toLowerCase()
-            .trim()
-            .includes(state.filterBucket.toLowerCase().trim()) ||
-          replication.id.toBucket
-            ?.toLowerCase()
-            .trim()
-            .includes(state.filterBucket.toLowerCase().trim());
+          !state.filterBuckets.length ||
+          state.filterBuckets.includes(
+            ReplicationsHelper.getBucketPair(replication),
+          );
         const isDirectionsMatched =
           !state.filterDirections.length ||
           state.filterDirections.includes(
@@ -160,7 +155,7 @@ export const useChorusReplicationsStore = defineStore(
     const isFiltered = computed<boolean>(
       () =>
         state.filterUsers.length !== 0 ||
-        state.filterBucket !== '' ||
+        state.filterBuckets.length !== 0 ||
         state.filterDirections.length !== 0 ||
         state.filterStatuses.length !== 0 ||
         state.filterCreatedAtRange !== null ||
@@ -169,7 +164,7 @@ export const useChorusReplicationsStore = defineStore(
 
     function clearFilters() {
       state.filterUsers = [];
-      state.filterBucket = '';
+      state.filterBuckets = [];
       state.filterDirections = [];
       state.filterStatuses = [];
       state.filterCreatedAtRange = null;

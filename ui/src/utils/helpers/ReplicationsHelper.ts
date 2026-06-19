@@ -84,4 +84,8 @@ export abstract class ReplicationsHelper {
 
     return `${replication.id.fromStorage} → ${replication.id.toStorage}`;
   }
+
+  static getBucketPair(replication: ChorusReplication): string {
+    return `${replication.id.fromBucket} → ${replication.id.toBucket}`;
+  }
 }
