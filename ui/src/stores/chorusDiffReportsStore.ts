@@ -36,6 +36,10 @@ interface ChorusDiffReportsState {
   pageSize: number;
   pollingRequest: Promise<unknown> | null;
   pollingTimeout: number | null;
+
+  selectedReportIds: string[];
+  isDeleteSelectedProcessing: boolean;
+
   filterDirections: string[];
   filterBuckets: string[];
   filterStatuses: DiffReportStatusFilter[];
@@ -53,6 +57,10 @@ function getInitialState(): ChorusDiffReportsState {
     pageSize: PAGE_SIZES[0],
     pollingRequest: null,
     pollingTimeout: null,
+
+    selectedReportIds: [],
+    isDeleteSelectedProcessing: false,
+
     filterDirections: [],
     filterBuckets: [],
     filterStatuses: [],
@@ -132,6 +140,93 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
     },
   }));
 
+  const selectedReportsCount = computed(() => state.selectedReportIds.length);
+
+  const isAnyReportsSelected = computed(
+    () => state.selectedReportIds.length !== 0,
+  );
+
+  const selectedReports = computed<AddId<DiffReport>[]>(() =>
+    state.reports.filter((report) =>
+      state.selectedReportIds.includes(report.idStr as string),
+    ),
+  );
+
+  async function deleteDiffReport(report: AddId<DiffReport>) {
+    let reportIndex = state.reports.findIndex(
+      ({ idStr }) => report.idStr === idStr,
+    );
+
+    if (reportIndex === -1) {
+      return;
+    }
+
+    await stopPolling();
+
+    try {
+      await ChorusService.deleteDiffReport({ locations: report.locations });
+
+      reportIndex = state.reports.findIndex(
+        ({ idStr }) => report.idStr === idStr,
+      );
+
+      state.reports.splice(reportIndex, 1);
+
+      state.selectedReportIds = state.selectedReportIds.filter(
+        (id) => id !== report.idStr,
+      );
+
+      const pageCount = pagination.value.pageCount ?? 1;
+
+      if (state.page > pageCount) {
+        state.page = pageCount;
+      }
+    } finally {
+      startPolling();
+    }
+  }
+
+  async function deleteDiffReports(reports: AddId<DiffReport>[]) {
+    state.isDeleteSelectedProcessing = true;
+
+    await stopPolling();
+
+    const successList: AddId<DiffReport>[] = [];
+    const errorList: AddId<DiffReport>[] = [];
+
+    await Promise.all(
+      reports.map(async (report) => {
+        try {
+          await ChorusService.deleteDiffReport({
+            locations: report.locations,
+          });
+          successList.push(report);
+        } catch {
+          errorList.push(report);
+        }
+      }),
+    );
+
+    state.reports = state.reports.filter(
+      (report) => !successList.some((item) => item.idStr === report.idStr),
+    );
+
+    state.selectedReportIds = state.selectedReportIds.filter(
+      (id) => !successList.some((item) => item.idStr === id),
+    );
+
+    const pageCount = pagination.value.pageCount ?? 1;
+
+    if (state.page > pageCount) {
+      state.page = pageCount;
+    }
+
+    startPolling();
+    state.isDeleteSelectedProcessing = false;
+
+    return { successList, errorList };
+  }
+
   async function getDiffReports() {
     const res = await ChorusService.getDiffReports();
 
@@ -208,7 +303,12 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
     isFiltered,
     pagination,
     computedReports,
+    selectedReportsCount,
+    isAnyReportsSelected,
+    selectedReports,
     clearFilters,
+    deleteDiffReport,
+    deleteDiffReports,
     initDiffReportPage,
     $reset,
   };
