@@ -41,7 +41,7 @@ export default <I18nMessages>{
     diffReportTo: 'comparison destination',
     diffReportStatusDetails: 'Diff Report Status Details',
     cliCheckWarning:
-      'This check was created via CLI. For further details or actions, please use the CLI.',
+      'This check across more than two locations ({locations}) was created via CLI. For further details or actions, please use the CLI.',
     filterByDirectionPlaceholder: 'Filter by direction',
     filterByBucketPlaceholder: 'Filter by bucket',
     filterByStatusPlaceholder: 'Filter by status',
@@ -106,7 +106,7 @@ export default <I18nMessages>{
     diffReportTo: 'Vergleichsziel',
     diffReportStatusDetails: 'Diff Report Status Details',
     cliCheckWarning:
-      'Dieser Check wurde über die CLI erstellt. Für weitere Details oder Aktionen verwenden Sie bitte die CLI.',
+      'Dieser Check für mehr als zwei Lokationen ({locations}) wurde über die CLI erstellt. Für weitere Details oder Aktionen verwenden Sie bitte die CLI.',
     filterByDirectionPlaceholder: 'Nach Richtung filtern',
     filterByBucketPlaceholder: 'Nach Bucket filtern',
     filterByStatusPlaceholder: 'Nach Status filtern',

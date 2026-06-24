@@ -97,6 +97,12 @@
     return report.locations as [DiffReportLocation, DiffReportLocation];
   }
 
+  function getLocationsSting(report: DiffReport): string {
+    return report.locations
+      .map((location) => `${location.storage}/${location.bucket}`)
+      .join(' -> ');
+  }
+
   const handleSortingChange = (newSorter: DataTableSortState | null) => {
     if (hasNoData.value) {
       return;
@@ -145,7 +151,9 @@
             v-if="!isTwoLocationReport(rowData)"
             class="diff-reports-list__location-warning"
           >
-            {{ t('cliCheckWarning') }}
+            {{
+              t('cliCheckWarning', { locations: getLocationsSting(rowData) })
+            }}
           </span>
           <DiffReportsDirectionCell
             v-else
