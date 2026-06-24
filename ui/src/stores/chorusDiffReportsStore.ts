@@ -233,6 +233,7 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
     state.reports = (res.checks ?? []).map((report) => ({
       ...report,
       idStr: DiffReportsHelper.getDiffReportId(report.locations),
+      isTwoLocationsReport: report.locations.length === 2,
     }));
   }
 

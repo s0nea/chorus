@@ -25,6 +25,7 @@ export default <I18nMessages>{
     columnStatus: 'Status',
     columnConfigs: 'Configs',
     columnVersioned: 'Versioned',
+    columnActions: 'Actions',
     columnEtags: 'ETags',
     columnSizes: 'Sizes',
     statusChecking: 'Checking',
@@ -53,6 +54,33 @@ export default <I18nMessages>{
     errorText:
       'An error occurred while getting the diff report list.\nPlease try one more time.',
     errorAction: 'Retry',
+
+    deleteSuccessTitle: 'Deleted!',
+    deleteSuccessContent: 'The following diff report has been deleted:',
+    deleteErrorTitle: 'Deletion failed!',
+    deleteErrorContent:
+      'An error occurred when deleting the following diff report:',
+    deleteErrorAction: 'Retry',
+    deletionConfirmTitle: 'Delete Diff Report',
+    deletionConfirmContent:
+      'You are about to delete the following Diff Report:',
+    deletionConfirmQuestion: 'Are you sure you want to proceed?',
+    deletionConfirmAction: 'Delete Diff Report',
+    actionDelete: 'Delete',
+    deleteCancelAction: 'Cancel',
+
+    actionDeleteSelected: 'Delete {total} selected',
+    actionSelectedDeleteTitle: 'Delete Diff Reports',
+    actionSelectedDeleteContent:
+      'You are about to delete the following Diff Reports:',
+    actionSelectedDeleteQuestion: 'Are you sure you want to proceed?',
+    deleteSelectedSuccessTitle: 'Deleted!',
+    deleteSelectedSuccessContent:
+      'The following {total} diff reports have been deleted:',
+    deleteSelectedErrorTitle: 'Deletion failed!',
+    deleteSelectedErrorContent:
+      'An error occurred while deleting the following {total} diff reports:',
+    deleteSelectedErrorAction: 'Retry',
   },
   [I18nLocale.DE]: {
     diffReportTitle: 'Diff-Reports',
@@ -64,6 +92,7 @@ export default <I18nMessages>{
     columnVersioned: 'Versioniert',
     columnEtags: 'ETags',
     columnSizes: 'Dateigrößen',
+    columnActions: 'Actions',
     statusChecking: 'Prüfung läuft',
     statusConsistent: 'Konsistent',
     statusInconsistent: 'Inkonsistent',
@@ -90,5 +119,33 @@ export default <I18nMessages>{
     errorText:
       'Beim Abrufen der Diff-Report-Liste ist ein Fehler aufgetreten.\nBitte versuchen Sie es erneut.',
     errorAction: 'Erneut versuchen',
+
+    deleteSuccessTitle: 'Gelöscht!',
+    deleteSuccessContent: 'Der folgende Diff-Report wurde gelöscht:',
+    deleteErrorTitle: 'Löschen fehlgeschlagen!',
+    deleteErrorContent:
+      'Beim Löschen des folgenden Diff-Reports ist ein Fehler aufgetreten:',
+    deleteErrorAction: 'Erneut versuchen',
+    deletionConfirmTitle: 'Diff-Report löschen',
+    deletionConfirmContent:
+      'Sie sind dabei, den folgenden Diff-Report zu löschen:',
+    deletionConfirmQuestion: 'Sind Sie sicher, dass Sie fortfahren möchten?',
+    deletionConfirmAction: 'Diff-Report löschen',
+    actionDelete: 'Löschen',
+    deleteCancelAction: 'Abbrechen',
+
+    actionDeleteSelected: '{total} ausgewählte löschen',
+    actionSelectedDeleteTitle: 'Diff-Reports löschen',
+    actionSelectedDeleteContent:
+      'Sie sind dabei, die folgenden Diff-Reports zu löschen:',
+    actionSelectedDeleteQuestion:
+      'Sind Sie sicher, dass Sie fortfahren möchten?',
+    deleteSelectedSuccessTitle: 'Gelöscht!',
+    deleteSelectedSuccessContent:
+      'Die folgenden {total} Diff-Reports wurden gelöscht:',
+    deleteSelectedErrorTitle: 'Löschen fehlgeschlagen!',
+    deleteSelectedErrorContent:
+      'Beim Löschen der folgenden {total} Diff-Reports ist ein Fehler aufgetreten:',
+    deleteSelectedErrorAction: 'Erneut versuchen',
   },
 };
