@@ -59,11 +59,14 @@
       v-else-if="replication.id.fromBucket && replication.id.toBucket"
     >
       <ChorusDirectionCell
-        :from-text="replication.id.fromBucket"
-        :to-text="replication.id.toBucket"
-        :from-tooltip="t('replicationFrom')"
-        :to-tooltip="t('replicationTo')"
-        to-type="warning"
+        :items="[
+          { text: replication.id.fromBucket, tooltip: t('replicationFrom') },
+          {
+            text: replication.id.toBucket,
+            tooltip: t('replicationTo'),
+            type: 'warning',
+          },
+        ]"
       />
     </div>
   </div>

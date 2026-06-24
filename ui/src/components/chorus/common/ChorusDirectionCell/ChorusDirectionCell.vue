@@ -21,42 +21,40 @@
 
   type CTagProps = InstanceType<typeof CTag>['$props'];
 
+  export interface DirectionItem {
+    text: string;
+    tooltip?: string;
+    type?: CTagProps['type'];
+    iconName?: string;
+  }
+
   defineProps<{
-    fromText: string;
-    toText: string;
-    fromTooltip?: string;
-    toTooltip?: string;
-    fromType?: CTagProps['type'];
-    toType?: CTagProps['type'];
-    fromIconName?: string;
-    toIconName?: string;
+    items: DirectionItem[];
     size?: CTagProps['size'];
   }>();
 </script>
 
 <template>
   <div class="chorus-direction-cell">
-    <ChorusStorageTag
-      :storage-name="fromText"
-      :tooltip="fromTooltip"
-      :type="fromType"
-      :size="size"
-      :icon-name="fromIconName"
-    />
+    <template
+      v-for="(item, index) in items"
+      :key="index"
+    >
+      <CIcon
+        v-if="index > 0"
+        class="chorus-direction-cell__arrow"
+        :is-inline="true"
+        :name="IconName.BASE_ARROW_FORWARD"
+      />
 
-    <CIcon
-      class="chorus-direction-cell__arrow"
-      :is-inline="true"
-      :name="IconName.BASE_ARROW_FORWARD"
-    />
-
-    <ChorusStorageTag
-      :storage-name="toText"
-      :tooltip="toTooltip"
-      :type="toType"
-      :size="size"
-      :icon-name="toIconName"
-    />
+      <ChorusStorageTag
+        :storage-name="item.text"
+        :tooltip="item.tooltip"
+        :type="item.type"
+        :size="size"
+        :icon-name="item.iconName"
+      />
+    </template>
   </div>
 </template>
 

@@ -32,10 +32,13 @@
 
 <template>
   <ChorusDirectionCell
-    :from-text="replication.id.fromStorage"
-    :to-text="replication.id.toStorage"
-    :from-tooltip="t('replicationFrom')"
-    :to-tooltip="t('replicationTo')"
-    to-type="warning"
+    :items="[
+      { text: replication.id.fromStorage, tooltip: t('replicationFrom') },
+      {
+        text: replication.id.toStorage,
+        tooltip: t('replicationTo'),
+        type: 'warning',
+      },
+    ]"
   />
 </template>
