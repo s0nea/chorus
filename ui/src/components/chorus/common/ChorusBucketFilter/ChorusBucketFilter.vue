@@ -61,10 +61,10 @@
   );
 
   watch(bucketOptions, () => {
-    const validLabels = bucketOptions.value.map((b) => b.label);
+    const validLabels = bucketOptions.value.map((bucket) => bucket.label);
 
-    filterValue.value = filterValue.value.filter((v) =>
-      validLabels.includes(v),
+    filterValue.value = filterValue.value.filter((value) =>
+      validLabels.includes(value),
     );
   });
 </script>
