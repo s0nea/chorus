@@ -75,7 +75,7 @@ export default <I18nMessages>{
     configNotIgnoresSizes: 'Ignoriert Dateigrößen nicht',
     diffReportFrom: 'Quelle des Vergleichs',
     diffReportTo: 'Vergleichsziel',
-    diffReportStatusDetails: 'Diff Report Status Details',
+    diffReportStatusDetails: 'Diff-Report Status Details',
     cliCheckWarning:
       'Dieser Check wurde über die CLI erstellt. Für weitere Details oder Aktionen verwenden Sie bitte die CLI.',
     filterByDirectionPlaceholder: 'Nach Richtung filtern',
