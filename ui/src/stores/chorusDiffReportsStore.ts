@@ -41,6 +41,7 @@ interface ChorusDiffReportsState {
 }
 
 const PAGE_SIZES = [10, 20, 30, 50, 100] as const;
+const POLL_INTERVAL_MS = 5000;
 
 function getInitialState(): ChorusDiffReportsState {
   return {
@@ -157,7 +158,7 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
       await state.pollingRequest;
     } finally {
       state.pollingRequest = null;
-      state.pollingTimeout = window.setTimeout(startPolling, 5000);
+      state.pollingTimeout = window.setTimeout(startPolling, POLL_INTERVAL_MS);
     }
   }
 
