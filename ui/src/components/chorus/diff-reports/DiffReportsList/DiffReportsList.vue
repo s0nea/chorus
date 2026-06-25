@@ -68,6 +68,7 @@
     {
       title: t('columnStatus'),
       key: 'status',
+      sorter: true,
     },
     {
       title: t('columnConfigs'),
