@@ -55,4 +55,12 @@ export abstract class DiffReportsHelper {
 
     return false;
   }
+
+  static getStatusSortOrder(report: DiffReport): number {
+    if (!report.ready) return 0; // checking
+
+    if (report.consistent) return 1; // consistent
+
+    return 2; // inconsistent
+  }
 }

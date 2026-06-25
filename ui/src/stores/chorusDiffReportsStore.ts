@@ -23,7 +23,6 @@ import type {
 import type { DiffReport } from '@/utils/types/chorus';
 import { DiffReportStatusFilter } from '@/utils/types/chorus';
 import type { AddId } from '@/utils/types/helper';
-import { GeneralHelper } from '@/utils/helpers/GeneralHelper';
 import { ChorusService } from '@/services/ChorusService';
 import { DiffReportsHelper } from '@/utils/helpers/DiffReportsHelper';
 
@@ -97,14 +96,22 @@ export const useChorusDiffReportsStore = defineStore('chorusDiffReport', () => {
     state.filterStatuses = [];
   }
 
+  function getSortedReportsByStatus(sorter: DataTableSortState) {
+    const direction = sorter.order === 'ascend' ? 1 : -1;
+
+    return [...filteredReports.value].sort(
+      (diffReportA, diffReportB) =>
+        (DiffReportsHelper.getStatusSortOrder(diffReportA) -
+          DiffReportsHelper.getStatusSortOrder(diffReportB)) *
+        direction,
+    );
+  }
+
   const computedReports = computed<AddId<DiffReport>[]>(() => {
-    const sortedReports = state.sorter
-      ? GeneralHelper.orderBy(
-          filteredReports.value,
-          [state.sorter.columnKey],
-          [state.sorter.order === 'ascend' ? 'asc' : 'desc'],
-        )
-      : filteredReports.value;
+    const sortedReports =
+      state.sorter && state.sorter.columnKey === 'status'
+        ? getSortedReportsByStatus(state.sorter)
+        : filteredReports.value;
 
     const start = (state.page - 1) * state.pageSize;
     const end = state.page * state.pageSize;
