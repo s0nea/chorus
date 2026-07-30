@@ -24,6 +24,7 @@ import { ErrorHelper } from '@/utils/helpers/ErrorHelper';
 
 interface ChorusDiffReportDetailState {
   isLoading: boolean;
+  isRestartLoading: boolean;
   hasError: boolean;
   isNotFound: boolean;
   report: DiffReport | null;
@@ -36,6 +37,7 @@ const POLL_INTERVAL_MS = 5000;
 function getInitialState(): ChorusDiffReportDetailState {
   return {
     isLoading: false,
+    isRestartLoading: false,
     hasError: false,
     isNotFound: false,
     report: null,
@@ -54,6 +56,17 @@ export const useChorusDiffReportDetailStore = defineStore(
       return DiffReportsHelper.parseQueryParamsToLocations(
         route.query.from,
         route.query.to,
+      );
+    });
+
+    const hasFixActivity = computed(() => {
+      if (!state.report) return false;
+
+      return (
+        !state.report.consistent &&
+        (Number(state.report.fixQueued) > 0 ||
+          Number(state.report.fixCompleted) > 0 ||
+          state.report.fixReady)
       );
     });
 
@@ -125,6 +138,21 @@ export const useChorusDiffReportDetailStore = defineStore(
       }
     }
 
+    async function restartDiffReport() {
+      state.isRestartLoading = true;
+
+      await stopPolling();
+
+      try {
+        await ChorusService.restartDiffReport({
+          locations: locations.value,
+        });
+      } finally {
+        state.isRestartLoading = false;
+        await startPolling();
+      }
+    }
+
     async function $reset() {
       try {
         await stopPolling();
@@ -136,7 +164,9 @@ export const useChorusDiffReportDetailStore = defineStore(
     return {
       ...toRefs(state),
       initDiffReportDetailsPage,
+      restartDiffReport,
       locations,
+      hasFixActivity,
       $reset,
     };
   },
