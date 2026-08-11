@@ -39,6 +39,7 @@ import type {
   DiffReportDetailResponse,
   DiffReportEntriesRequest,
   DiffReportEntriesResponse,
+  DiffReportFixRequest,
 } from '@/utils/types/chorus';
 
 export abstract class ChorusService {
@@ -200,6 +201,10 @@ export abstract class ChorusService {
     );
 
     return data;
+  }
+
+  static async fixDiffReport(payload: DiffReportFixRequest): Promise<void> {
+    await apiClient.post(ApiHelper.getChorusAPIUrl('/diff/fix'), payload);
   }
 
   static async getDiffReportEntries(

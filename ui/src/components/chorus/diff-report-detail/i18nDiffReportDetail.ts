@@ -76,6 +76,20 @@ export default <I18nMessages>{
       'An error occurred while restarting the diff report. You may see outdated report information.',
     errorDetailsLabel: 'Error details: ',
     restartErrorAction: 'Retry',
+    // Fix
+    fixAction: 'Autofix all',
+    fixConfirmTitle: 'Autofix All Inconsistent Objects',
+    fixConfirmContent:
+      'All inconsistent objects will be copied from the selected source location. Please select which location should be used as the source of truth.',
+    fixSourceLabel: 'Source location:',
+    fixConfirmAction: 'Autofix all',
+    fixCancelAction: 'Cancel',
+    fixSuccessTitle: 'Autofix started!',
+    fixSuccessContent: 'Autofix has been started for all inconsistent objects.',
+    fixErrorTitle: 'Autofix failed!',
+    fixErrorContent:
+      'An error occurred while starting the autofix. Please try again.',
+    fixErrorAction: 'Retry',
     // Entries
     entriesTitle: 'Inconsistent Objects',
     entriesSearchPlaceholder: 'Search by object name...',
@@ -144,6 +158,21 @@ export default <I18nMessages>{
       'Beim Neustart des Diff-Reports ist ein Fehler aufgetreten. Die angezeigten Report Details könnten möglicherweise nicht aktuell sein.',
     errorDetailsLabel: 'Error Details: ',
     restartErrorAction: 'Neustarten',
+    // Fix
+    fixAction: 'Alle beheben',
+    fixConfirmTitle: 'Alle inkonsistenten Objekte beheben',
+    fixConfirmContent:
+      'Alle inkonsistenten Objekte werden vom ausgewählten Quell-Standort kopiert. Bitte wählen Sie aus, welcher Standort als Quelle dienen soll.',
+    fixSourceLabel: 'Quell-Standort:',
+    fixConfirmAction: 'Alle beheben',
+    fixCancelAction: 'Abbrechen',
+    fixSuccessTitle: 'Behebung gestartet!',
+    fixSuccessContent:
+      'Die Behebung aller inkonsistenten Objekte wurde gestartet.',
+    fixErrorTitle: 'Behebung fehlgeschlagen!',
+    fixErrorContent:
+      'Beim Starten der Behebung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+    fixErrorAction: 'Erneut versuchen',
     // Entries
     entriesTitle: 'Inkonsistente Objekte',
     entriesSearchPlaceholder: 'Nach Objektname suchen...',

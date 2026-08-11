@@ -51,6 +51,7 @@ export enum IconName {
   BASE_REFRESH = 'base-refresh',
   BASE_SERVER = 'base-server',
   BASE_EYE = 'base-eye',
+  BASE_FLASH = 'base-flash',
 
   // custom folder
   // TODO: we may want to define specific icons for S3 and SWIFT

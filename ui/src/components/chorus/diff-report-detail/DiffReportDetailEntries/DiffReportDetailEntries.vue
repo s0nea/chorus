@@ -21,6 +21,7 @@
   import i18nDiffReportDetail from '@/components/chorus/diff-report-detail/i18nDiffReportDetail';
   import DiffReportDetailEntriesList from '@/components/chorus/diff-report-detail/DiffReportDetailEntriesList/DiffReportDetailEntriesList.vue';
   import DiffReportDetailEntriesFilters from '@/components/chorus/diff-report-detail/DiffReportDetailEntriesFilters/DiffReportDetailEntriesFilters.vue';
+  import DiffReportDetailEntriesListActions from '@/components/chorus/diff-report-detail/DiffReportDetailEntriesListActions/DiffReportDetailEntriesListActions.vue';
 
   const { t } = useI18n({ messages: i18nDiffReportDetail });
   const entriesStore = useChorusDiffReportEntriesStore();
@@ -40,6 +41,9 @@
       class="diff-report-detail-entries__filters"
     />
 
+    <DiffReportDetailEntriesListActions
+      class="diff-report-detail-entries__actions"
+    />
     <DiffReportDetailEntriesList class="diff-report-detail-entries__entries" />
   </div>
 </template>
@@ -50,6 +54,10 @@
   .diff-report-detail-entries {
     h5 {
       margin-bottom: utils.unit(3);
+    }
+
+    &__actions {
+      margin-bottom: utils.unit(6);
     }
 
     &__filters {

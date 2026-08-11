@@ -327,6 +327,11 @@ export interface DiffReportDeleteRequest {
 
 export type DiffReportRestartRequest = DiffReportDeleteRequest;
 
+export interface DiffReportFixRequest {
+  locations: DiffReportLocation[];
+  sourceIndex: number;
+}
+
 export interface AddDiffReportRequest {
   locations: DiffReportLocation[];
   user: string;
