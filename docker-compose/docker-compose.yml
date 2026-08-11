@@ -63,17 +63,17 @@ services:
       - "9669:9669" # expose proxy s3 api
   # Chorus web UI
   # Access UI on http://localhost:8080
-  web-ui:
-    depends_on:
-      - worker
-    build:
-      context: ../ui
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    environment:
+  #web-ui:
+  #  depends_on:
+  #    - worker
+  #  build:
+  #    context: ../ui
+  #    dockerfile: Dockerfile
+  #  ports:
+  #    - "8080:80"
+  #  environment:
       # URL to worker REST API
-      - "BACKEND_URL=http://worker:9671"
+  #    - "BACKEND_URL=http://worker:9671"
   # start fake in-memory s3 endpoints. To enable run with fake profile: "docker-compose up --profile fake up"
   fake-s3-main:
     profiles:

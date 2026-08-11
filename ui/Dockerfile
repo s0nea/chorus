@@ -1,5 +1,5 @@
 # Build stage
-FROM --platform=$BUILDPLATFORM node:20 as build-stage
+FROM node:20 as build-stage
 WORKDIR /app
 
 # Install dependencies
