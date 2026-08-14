@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint:types": "vue-tsc --build --force",
     "lint:eslint": "eslint --no-fix --max-warnings 0",
     "lint:oxlint": "oxlint . -D correctness",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
+    "@pinia/testing": "^2.0.1",
     "@tsconfig/node20": "^20.1.8",
     "@types/chart.js": "^4.0.1",
     "@types/date-fns": "^2.6.0",
@@ -50,6 +52,7 @@
     "@types/node": "^24.10.1",
     "@types/vuelidate": "^0.7.22",
     "@vitejs/plugin-vue": "^6.0.2",
+    "@vitest/coverage-v8": "4.0.14",
     "@vitest/eslint-plugin": "^1.5.1",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.6.0",

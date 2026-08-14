@@ -14,21 +14,25 @@
  *  limitations under the License.
  */
 
-import { fileURLToPath } from 'node:url'
-import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
-import viteConfig from './vite.config'
+import { vi } from 'vitest';
 
-export default mergeConfig(
-  viteConfig,
-  defineConfig({
-    test: {
-      environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/**'],
-      root: fileURLToPath(new URL('./', import.meta.url)),
-      setupFiles: ['./src/test-setup.ts'],
-      coverage: {
-        reporter: ['text', 'lcov'],
-      },
-    },
-  }),
-)
+vi.mock('@/http/apiClient', () => ({
+  default: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    patch: vi.fn(),
+    delete: vi.fn(),
+    request: vi.fn(),
+  },
+}));
+
+vi.mock('@clyso/clyso-ui-kit', () => ({
+  I18nLocale: { EN: 'en', DE: 'de' },
+  I18N_DEFAULT_LOCALE: 'en',
+  ColorScheme: { DARK: 'DARK', LIGHT: 'LIGHT' },
+  useNotification: vi.fn(() => ({
+    createNotification: vi.fn(() => ({ value: { id: 'mock-id' } })),
+    removeNotification: vi.fn(),
+  })),
+}));

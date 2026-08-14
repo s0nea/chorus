@@ -2,7 +2,7 @@
   "extends": ["@commitlint/config-conventional"],
   "parserPreset": {
     "parserOpts": {
-      "noteKeywords": ["Signed-off-by", "On-behalf-of"]
+      "noteKeywords": ["Signed-off-by", "On-behalf-of", "Co-Authored-By"]
     }
   },
   "rules": {
