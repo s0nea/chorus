@@ -14,9 +14,21 @@
  *  limitations under the License.
  */
 
-import { vi } from 'vitest';
+import { vi, afterEach } from 'vitest';
 
-// jsdom stub: in-memory localStorage
+// jsdom stubs: matchMedia + localStorage
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
 const localStorageMap = new Map<string, string>();
 
 Object.defineProperty(window, 'localStorage', {
@@ -31,6 +43,10 @@ Object.defineProperty(window, 'localStorage', {
     },
     key: () => null,
   },
+});
+
+afterEach(() => {
+  localStorageMap.clear();
 });
 
 vi.mock('@/http/apiClient', () => ({

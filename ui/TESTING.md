@@ -100,7 +100,7 @@ import { setActivePinia, createPinia } from 'pinia'
 import { useChorusStoragesStore } from '@/stores/chorusStoragesStore'
 import apiClient from '@/http/apiClient'
 
-vi.mock('@/http/apiClient')
+// apiClient is globally mocked in test-setup.ts
 
 describe('chorusStoragesStore', () => {
   beforeEach(() => {
