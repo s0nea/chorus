@@ -16,6 +16,23 @@
 
 import { vi } from 'vitest';
 
+// jsdom stub: in-memory localStorage
+const localStorageMap = new Map<string, string>();
+
+Object.defineProperty(window, 'localStorage', {
+  writable: true,
+  value: {
+    getItem: (key: string) => localStorageMap.get(key) ?? null,
+    setItem: (key: string, value: string) => localStorageMap.set(key, value),
+    removeItem: (key: string) => localStorageMap.delete(key),
+    clear: () => localStorageMap.clear(),
+    get length() {
+      return localStorageMap.size;
+    },
+    key: () => null,
+  },
+});
+
 vi.mock('@/http/apiClient', () => ({
   default: {
     get: vi.fn(),
@@ -24,6 +41,15 @@ vi.mock('@/http/apiClient', () => ({
     patch: vi.fn(),
     delete: vi.fn(),
     request: vi.fn(),
+  },
+}));
+
+vi.mock('@/i18n', () => ({
+  i18n: {
+    global: {
+      locale: { value: 'en' },
+      fallbackLocale: { value: 'en' },
+    },
   },
 }));
 
