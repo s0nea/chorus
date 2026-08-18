@@ -82,3 +82,24 @@ vi.mock('@clyso/clyso-ui-kit', () => ({
     removeNotification: vi.fn(),
   })),
 }));
+
+vi.mock('vue-router', () => ({
+  useRouter: vi.fn(() => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    back: vi.fn(),
+  })),
+  useRoute: vi.fn(() => ({
+    query: {},
+    params: {},
+    path: '/',
+    name: '',
+  })),
+}));
+
+vi.mock('vue-i18n', () => ({
+  useI18n: vi.fn(() => ({
+    t: (key: string) => key,
+    locale: { value: 'en' },
+  })),
+}));

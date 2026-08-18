@@ -160,6 +160,18 @@ describe('ChorusWizard', () => {
 
 ## Mocking Rules
 
+### Global mocks (test-setup.ts)
+
+These are mocked once in `src/test-setup.ts` and available in every test — no inline `vi.mock` needed:
+
+- `@/http/apiClient` — all HTTP methods (`get`, `post`, `put`, `patch`, `delete`, `request`)
+- `@/i18n` — minimal i18n instance with `locale: 'en'`
+- `vue-router` — `useRouter` (with `push`, `replace`, `back`) and `useRoute`
+- `vue-i18n` — `useI18n` (with `t` passthrough and `locale: 'en'`)
+- `@clyso/clyso-ui-kit` — `I18nLocale`, `I18N_DEFAULT_LOCALE`, `ColorScheme`, `useNotification`
+- `window.matchMedia` — stub returning `matches: false`
+- `window.localStorage` — in-memory `Map`-backed stub
+
 ### DO mock
 
 - **HTTP layer**: `vi.mock('@/http/apiClient')` — intercepts all API calls
