@@ -53,12 +53,16 @@ vi.mock('@/i18n', () => ({
   },
 }));
 
+let notificationIdCounter = 0;
+
 vi.mock('@clyso/clyso-ui-kit', () => ({
   I18nLocale: { EN: 'en', DE: 'de' },
   I18N_DEFAULT_LOCALE: 'en',
   ColorScheme: { DARK: 'DARK', LIGHT: 'LIGHT' },
   useNotification: vi.fn(() => ({
-    createNotification: vi.fn(() => ({ value: { id: 'mock-id' } })),
+    createNotification: vi.fn(() => ({
+      value: { id: `notif-${++notificationIdCounter}` },
+    })),
     removeNotification: vi.fn(),
   })),
 }));
